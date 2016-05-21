@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require masonry/dist/masonry.pkgd.min.js
+//= require bootstrap/dist/js/bootstrap.min.js
 //= require_tree .

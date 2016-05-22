@@ -1,0 +1,2 @@
+module PinsControllerHelper
+end

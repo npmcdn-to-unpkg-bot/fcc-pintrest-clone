@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :identities
+  has_many :pins
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :omniauthable, :database_authenticatable, :registerable,

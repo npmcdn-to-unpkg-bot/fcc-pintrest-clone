@@ -1,0 +1,15 @@
+<h1>New Crazy Pin</h1>
+
+<div class="form-container">
+  <%= form_for @pin, url: user_pins_path do |f| %>
+    <div class="form-group">
+      <%= f.label :title %>
+      <%= f.text_field :title, :class => "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :url %>
+      <%= f.text_field :url, :class => "form-control" %>
+    </div>
+    <%= f.submit "Create Crazy Pin",  :class => "btn btn-primary" %>
+  <% end %>
+</div>

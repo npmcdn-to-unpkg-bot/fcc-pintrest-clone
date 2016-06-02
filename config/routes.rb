@@ -1,13 +1,17 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
-  root 'welcome#index'
+  root 'pins#index'
 
-  devise_for :users, class_name: 'FormUser', :controllers => { omniauth_callbacks: 'omniauth_callbacks',
-    registrations: 'registrations' }
+  devise_for :users, class_name: 'FormUser', :controllers => { omniauth_callbacks: 'users/omniauth_callbacks',
+    registrations: 'users/registrations', sessions: 'users/sessions' }
 
   devise_scope :user do
-    get '/users/auth/:provider/upgrade' => 'omniauth_callbacks#upgrade', as: :user_omniauth_upgrade
-    get '/users/auth/:provider/setup', :to => 'omniauth_callbacks#setup'
+    get '/users/auth/:provider/upgrade' => 'users/omniauth_callbacks#upgrade', as: :user_omniauth_upgrade
+    get '/users/auth/:provider/setup', :to => 'users/omniauth_callbacks#setup'
+  end
+
+  resources :pins, only: [:index]
+  resources :users, only: [:show] do
+    resources :pins, only: [:index, :create, :new, :destroy]
   end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

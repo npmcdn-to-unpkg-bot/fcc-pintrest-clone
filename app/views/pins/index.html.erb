@@ -1,0 +1,38 @@
+<% if current_user %>
+  <% if @user != nil %>
+    <% if current_user.id == @user.id %>
+    <h1>Your board of Crazy Pins</h1>
+    <!--
+      TODO:
+        customize heading to include user's name
+        catch: twitter auth doesn't include user's email
+    -->
+    <% else %>
+    <h1><%= @user.id %>'s board of Crazy Pins</h1>
+    <% end %>
+    <% if !@pins.empty? %>
+      <% @pins.each do |pin| %>
+        <div class="text-center thumbnail">
+          <div class="responsive-img">
+            <%= image_tag pin.url %>
+          </div>
+          <p><strong><%= pin.title %></strong></p>
+
+          <% if current_user %>
+            <p><strong><%= current_user.email %></strong></p>
+            <% if current_user.id == pin.user.id %>
+              <p><%= link_to "Delete", user_pin_path(current_user.id, pin.id), method: :delete %></p>
+              <p><%= "#{current_user.id} #{pin.id}" %></p>
+            <% else %>
+              <p><strong><%= pin.user.email %></strong></p>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      You have no crazy pins.
+    <% end %>
+  <% else %>
+    <h1>The user you are looking for does not exist.</h1>
+  <% end %>
+<% end %>

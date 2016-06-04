@@ -1,6 +1,6 @@
 <% if current_user %>
   <% if @user != nil %>
-    <% if current_user.id == @user.id %>
+    <% if current_user.username == @user.username %>
     <h1>Your board of Crazy Pins</h1>
     <!--
       TODO:
@@ -8,7 +8,7 @@
         catch: twitter auth doesn't include user's email
     -->
     <% else %>
-    <h1><%= @user.id %>'s board of Crazy Pins</h1>
+    <h1><%= @user.username %>'s board of Crazy Pins</h1>
     <% end %>
     <% if !@pins.empty? %>
       <% @pins.each do |pin| %>
@@ -17,7 +17,9 @@
             <%= image_tag pin.url %>
           </div>
           <p><strong><%= pin.title %></strong></p>
-
+          <!-- TODO:
+              fix unauthorized deletion of pins
+          -->
           <% if current_user %>
             <p><strong><%= current_user.email %></strong></p>
             <% if current_user.id == pin.user.id %>

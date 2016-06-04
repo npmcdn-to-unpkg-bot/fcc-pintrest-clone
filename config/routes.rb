@@ -9,8 +9,10 @@ Rails.application.routes.draw do
     get '/users/auth/:provider/setup', :to => 'users/omniauth_callbacks#setup'
   end
 
+  get '/user/:username' => 'users#show'
+  
   resources :pins, only: [:index]
-  resources :users, only: [:show] do
+  resources :user, only: [:show] do
     resources :pins, only: [:index, :create, :new, :destroy]
   end
   # The priority is based upon order of creation: first created -> highest priority.
